@@ -1,0 +1,282 @@
+{
+  "ID": "do_WaterfallView",
+  "IsContainer": "0",
+  "Type": "UI",
+  "UIType": "Container",
+  "Name": "瀑布流视图",
+  "Version": "Internal",
+  "Description": "WaterfallView为组件do_GridView的优化版:WaterfallView会保留用户指定的元数据的UI模板的高度(如果UI模板高度都一样,显示的就是GridView的效果)",
+  "Icon": "",
+  "BBS": "",
+  "Keyword": "其它类型",
+  "IOS": {
+    "Support": 1,
+    "MinVersion": "7.0"
+  },
+  "Android": {
+    "Support": 1,
+    "MinVersion": "4.0"
+  },
+  "Windows": {
+    "Support": 0,
+    "MinVersion": ""
+  },
+  "WindowsPhone": {
+    "Support": 0,
+    "MinVersion": ""
+  },
+  "Html": {
+    "Support": 1,
+    "MinVersion": "5.0"
+  },
+  "Properties": [
+    {
+      "ID": "canScrollToTop",
+      "Name": "是否滚动到屏幕顶部",
+      "Type": "Bool",
+      "Type_JavaScript": "Bool",
+      "DefaultValue": "true",
+      "EditType": "0",
+      "Group": "",
+      "Description": "属性设置成true时可以通过点击手机状态栏返回内容的顶部；仅支持iOS平台",
+      "Design": {
+        "Type": "Boolean",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "headerView",
+      "Name": "表头视图",
+      "Type": "String",
+      "Type_JavaScript": "String",
+      "DefaultValue": "",
+      "EditType": "0",
+      "Group": "",
+      "Description": "设置要显示的表头视图地址，不填但isHeaderVisible为true时有缺省样式",
+      "Design": {
+        "Type": "FileSource",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "hSpacing",
+      "Name": "两列之间的间距",
+      "Type": "Number",
+      "Type_JavaScript": "Number",
+      "DefaultValue": "",
+      "EditType": "0",
+      "Group": "",
+      "Description": "两列之间的间距，单位为px",
+      "Design": {
+        "Type": "UInteger",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "isHeaderVisible",
+      "Name": "是否显示headerview",
+      "Type": "Bool",
+      "Type_JavaScript": "Bool",
+      "DefaultValue": "false",
+      "EditType": "0",
+      "Group": "",
+      "Description": "缺省false不显示",
+      "Design": {
+        "Type": "Boolean",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "items",
+      "Name": "WaterfallView显示内容",
+      "Type": "String",
+      "Type_JavaScript": "String",
+      "DefaultValue": "",
+      "EditType": "1",
+      "Group": "",
+      "Description": "设置WaterfallView显示内容（必须是一个数组），例如：\r\n[{\"template\":0,\"image\":\"source://1.jpg\"},{\"template\":2,\"title\":\"content\",\"image\":\"source://1.jpg\"}]；设置该属性，会把值传递到每个子View，相当于触发了子View的相关属性的修改",
+      "Design": {
+        "Type": "Richtext",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "numColumns",
+      "Name": "WaterfallView对应的列数",
+      "Type": "Number",
+      "Type_JavaScript": "Number",
+      "DefaultValue": "1",
+      "EditType": "0",
+      "Group": "",
+      "Description": "设置这个WaterfallView显示多少列，-1 表示自动适应",
+      "Design": {
+        "Type": "UInteger",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "templates",
+      "Name": "显示视图对应UI模板文件",
+      "Type": "Node",
+      "Type_JavaScript": "Node",
+      "DefaultValue": "",
+      "EditType": "0",
+      "Group": "",
+      "Description": "一个WaterfallView可以有多个cell模板，这个属性是一个json array，每一个元素都是一个source ui文件，这些ui文件没有自己的逻辑代码，和WaterfallView所在的page共用一个脚本环境。\r\n这个属性的格式类似如下：\r\n[\"source://view/cell1.ui\",\"source://view/cell2.ui\",\"source://view/cell3.ui]；",
+      "Design": {
+        "Type": "Richtext",
+        "Data": []
+      },
+      "Deprecated": false
+    },
+    {
+      "ID": "vSpacing",
+      "Name": "两行之间的间距",
+      "Type": "Number",
+      "Type_JavaScript": "Number",
+      "DefaultValue": "",
+      "EditType": "0",
+      "Group": "",
+      "Description": "两行之间的间距，单位为px",
+      "Design": {
+        "Type": "UInteger",
+        "Data": []
+      },
+      "Deprecated": false
+    }
+  ],
+  "Events": [
+    {
+      "ID": "longTouch",
+      "Description": "长按cell触发",
+      "ReturnType": "String",
+      "ReturnType_JavaScript": "number",
+      "ReturnDesc": "当前cell的position值",
+      "Deprecated": false
+    },
+    {
+      "ID": "longTouch1",
+      "Description": "长按cell触发",
+      "ReturnType": "Node",
+      "ReturnType_JavaScript": "Node",
+      "ReturnDesc": "当前cell的position值和在当前cell的绝对位置x,y，如{'position':'2','x':'0','y':'30'}",
+      "Deprecated": false
+    },
+    {
+      "ID": "pull",
+      "Description": "下拉headerview事件",
+      "ReturnType": "String",
+      "ReturnType_JavaScript": "node",
+      "ReturnDesc": "返回{state,offset}，其中state表示headerview的状态，offset为headerview下拉的位移量；其中state=0：表示开始下拉headerview，在headerview下拉到headerview复位整个过程中，pull事件会触发很多次；state=1：表示下拉headerview超过headerview的高度，触发一次这个事件，前端开发者接受到这个事件会更新headerview的ui；state=2：下拉超过一定值，触发state=1事件后，松手会触发一次这个事件，前端开发者接受到这个事件会更新headerview的ui，然后开始加载数据，数据加载完后需要调用rebound方法让header复位",
+      "Deprecated": false
+    },
+    {
+      "ID": "touch",
+      "Description": "点击cell触发",
+      "ReturnType": "String",
+      "ReturnType_JavaScript": "number",
+      "ReturnDesc": "当前cell的position值",
+      "Deprecated": false
+    },
+    {
+      "ID": "touch1",
+      "Description": "点击cell触发",
+      "ReturnType": "Node",
+      "ReturnType_JavaScript": "Node",
+      "ReturnDesc": "当前cell的position值和在当前cell的绝对位置x,y，如{'position':'2','x':'0','y':'30'}",
+      "Deprecated": false
+    }
+  ],
+  "syncMethodes": [
+    {
+      "ID": "bindItems",
+      "Name": "绑定item的数据",
+      "Description": "可绑定listData实例",
+      "ReturnType": "",
+      "ReturnType_JavaScript": "",
+      "ReturnDesc": "",
+      "Paras": [
+        {
+          "ID": "data",
+          "Name": "数据",
+          "Type": "Node",
+          "Type_JavaScript": "Node",
+          "Required": 0,
+          "DefaultValue": "",
+          "Description": "",
+          "Deprecated": false
+        }
+      ],
+      "Deprecated": false
+    },
+    {
+      "ID": "rebound",
+      "Name": "复位",
+      "Description": "headerview复位，通常下拉刷新后处理数据后需要调用这个方法恢复状态",
+      "ReturnType": "",
+      "ReturnType_JavaScript": "",
+      "ReturnDesc": "",
+      "Paras": [],
+      "Deprecated": false
+    },
+    {
+      "ID": "refreshItems",
+      "Name": "刷新item数据",
+      "Description": "",
+      "ReturnType": "",
+      "ReturnType_JavaScript": "",
+      "ReturnDesc": "",
+      "Paras": [
+        {
+          "ID": "indexs",
+          "Name": "刷新数据的索引",
+          "Type": "Node",
+          "Type_JavaScript": "Node",
+          "Required": 0,
+          "DefaultValue": "",
+          "Description": "要刷新的数据的索引，是一个数组，可以为单个或多个索引。如果不填则为刷新全部数据，仅支持iOS平台",
+          "Deprecated": false
+        }
+      ],
+      "Deprecated": false
+    },
+    {
+      "ID": "scrollToPosition",
+      "Name": "平滑地滚动到特定位置",
+      "Description": "",
+      "ReturnType": "",
+      "ReturnType_JavaScript": "",
+      "ReturnDesc": "",
+      "Paras": [
+        {
+          "ID": "position",
+          "Name": "位置",
+          "Type": "Number",
+          "Type_JavaScript": "Number",
+          "Required": 0,
+          "DefaultValue": "0",
+          "Description": "表示listview的第几行，从0开始计数，缺省值是 0",
+          "Deprecated": false
+        },
+        {
+          "ID": "isSmooth",
+          "Name": "是否有滚动效果",
+          "Type": "Bool",
+          "Type_JavaScript": "Bool",
+          "Required": 0,
+          "DefaultValue": "false",
+          "Description": "缺省是false表示直接跳转到某一行，没有任何平滑过渡的效果。为true表示平滑到那一行；其中为false的时候是不会触发scroll事件的，为true会触发；windows不支持该效果",
+          "Deprecated": false
+        }
+      ],
+      "Deprecated": false
+    }
+  ],
+  "asyncMethodes": []
+}
